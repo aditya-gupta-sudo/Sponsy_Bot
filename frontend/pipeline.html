@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#14243c">
+
+    <title>SponsyBot | Sponsor Pipeline</title>
+
+    <link rel="stylesheet" href="/static/style.css?v=17">
+
+    <script src="/static/sidebar.js?v=8" defer></script>
+    <script src="/static/pipeline.js?v=20261021-8" defer></script>
+</head>
+
+<body>
+<div class="app-layout">
+
+    <aside
+        class="sidebar"
+        id="app-sidebar"
+        aria-label="Main navigation">
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <a class="breadcrumb-link" href="/events">
+                ← Back to Events
+            </a>
+
+            <span class="workspace-label">
+                SPONSORSHIP WORKSPACE
+            </span>
+        </header>
+
+        <div class="page-content">
+
+            <!-- Event heading and inline workflow progress -->
+            <section class="welcome-section pipeline-welcome">
+
+                <div class="pipeline-heading-main">
+
+                    <p class="eyebrow">SPONSOR PIPELINE</p>
+
+                    <div class="pipeline-title-row">
+
+                        <h1 id="pipelineEventTitle">
+                            Sponsor <span>Pipeline</span>
+                        </h1>
+
+                        <!-- Live progress for the current event -->
+                        <div
+                            id="pipelineWorkflowProgress"
+                            class="pipeline-inline-progress"
+                            aria-label="Event workflow progress"
+                            aria-live="polite">
+
+                            <div
+                                id="pipelineWorkflowPills"
+                                class="pipeline-progress-pills">
+
+                                <span class="pipeline-progress-loading">
+                                    Loading progress...
+                                </span>
+
+                            </div>
+
+                            <span
+                                id="pipelineWorkflowCount"
+                                class="pipeline-progress-count">
+                                —/6
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <p
+                        id="pipelineEventMeta"
+                        class="welcome-description">
+                        Select an event to manage its sponsor candidates,
+                        contacts, and outreach.
+                    </p>
+
+                </div>
+
+                <div class="review-actions">
+
+                    <button
+                        id="refreshPipelineButton"
+                        class="button button-secondary"
+                        type="button">
+                        Refresh
+                    </button>
+
+                    <button
+                        id="runPipelineDiscoveryButton"
+                        class="button button-primary"
+                        type="button"
+                        disabled>
+                        Run Sponsor Discovery →
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- Event picker -->
+            <section
+                id="pipelineEventPicker"
+                class="section-block panel"
+                hidden>
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Choose an event</h2>
+                        <p>
+                            Select an event to view its saved sponsor
+                            research and outreach.
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    id="pipelineEventList"
+                    class="pipeline-event-list">
+                </div>
+
+            </section>
+
+
+            <!-- Event summary cards -->
+            <section
+                class="stats-grid pipeline-stats"
+                aria-label="Sponsor pipeline summary">
+
+                <article class="stat-card">
+                    <div class="stat-icon blue">⌕</div>
+                    <div>
+                        <p>Sponsor Candidates</p>
+                        <h2 id="pipelineCandidateCount">—</h2>
+                        <small>Saved for this event</small>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <div>
+                        <p>Selected</p>
+                        <h2 id="pipelineSelectedCount">—</h2>
+                        <small>Approved for contact discovery</small>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon orange">✉</div>
+                    <div>
+                        <p>Email Drafts</p>
+                        <h2 id="pipelineDraftCount">—</h2>
+                        <small>Drafts and outreach records</small>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon purple">↗</div>
+                    <div>
+                        <p>Emails Sent</p>
+                        <h2 id="pipelineSentCount">—</h2>
+                        <small>Recorded successful sends</small>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- Sponsor research and review -->
+            <section class="section-block panel">
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="eyebrow">RESEARCH &amp; REVIEW</p>
+
+                        <h2>Potential sponsors</h2>
+
+                        <p
+                            id="pipelineMessage"
+                            role="status"
+                            aria-live="polite">
+                            Loading sponsor candidates…
+                        </p>
+                    </div>
+
+                    <label class="event-search-box pipeline-search">
+                        <span aria-hidden="true">⌕</span>
+
+                        <input
+                            id="pipelineSearch"
+                            type="search"
+                            placeholder="Search sponsor, industry, evidence…"
+                            aria-label="Search sponsors">
+                    </label>
+
+                </div>
+
+                <div
+                    id="pipelineCandidates"
+                    class="sponsor-candidates">
+                </div>
+
+            </section>
+
+
+            <footer class="page-footer">
+                <strong>SponsyBot</strong>
+                <span>
+                    Review every sponsor and approve each email before sending.
+                </span>
+            </footer>
+
+        </div>
+    </main>
+</div>
+
+
+<!-- Email draft review and send dialog -->
+<dialog
+    id="emailDraftDialog"
+    class="event-dialog email-modal"
+    aria-labelledby="emailDraftHeading">
+
+    <form id="emailDraftForm" method="dialog">
+
+        <div class="dialog-header">
+
+            <div>
+                <p class="eyebrow">HUMAN REVIEW REQUIRED</p>
+                <h2 id="emailDraftHeading">Review email draft</h2>
+                <p id="emailDraftSubtitle">
+                    Edit the draft before sending.
+                </p>
+            </div>
+
+            <button
+                id="closeEmailDraft"
+                class="icon-button"
+                type="button"
+                aria-label="Close email editor">
+                ✕
+            </button>
+
+        </div>
+
+
+        <div class="email-recipient-summary">
+
+            <div>
+                <span>From</span>
+                <strong id="emailDraftSender">
+                    Configured SMTP sender
+                </strong>
+            </div>
+
+            <div>
+                <span>To</span>
+                <strong id="emailDraftRecipient">
+                    Loading recipient…
+                </strong>
+            </div>
+
+        </div>
+
+
+        <label class="form-field">
+            Subject
+            <input
+                id="emailDraftSubject"
+                type="text"
+                maxlength="500"
+                required>
+        </label>
+
+        <label class="form-field">
+            Email body
+            <textarea
+                id="emailDraftBody"
+                rows="12"
+                required>
+            </textarea>
+        </label>
+
+
+        <label class="email-confirm-recipient">
+            <input
+                id="confirmRecipientCheckbox"
+                type="checkbox">
+
+            I have verified that the recipient address above is correct.
+        </label>
+
+
+        <p
+            id="emailDraftStatus"
+            class="email-draft-status"
+            role="status"
+            aria-live="polite">
+        </p>
+
+
+        <div class="dialog-actions">
+
+            <button
+                id="cancelEmailDraft"
+                class="button button-secondary"
+                type="button">
+                Close
+            </button>
+
+            <button
+                id="saveEmailDraft"
+                class="button button-secondary"
+                type="button">
+                Save Draft
+            </button>
+
+            <button
+                id="sendEmailDraft"
+                class="button button-primary"
+                type="button"
+                disabled>
+                Approve &amp; Send
+            </button>
+
+        </div>
+
+    </form>
+</dialog>
+
+</body>
+</html>

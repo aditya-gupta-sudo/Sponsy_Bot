@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#14243c">
+    <title>SponsyBot | Email Settings</title>
+    <link rel="stylesheet" href="/static/style.css?v=18">
+    <script src="/static/sidebar.js?v=7" defer></script>
+    <script src="/static/email-settings.js?v=1" defer></script>
+</head>
+<body>
+<div class="app-layout">
+    <aside class="sidebar" id="app-sidebar" aria-label="Main navigation"></aside>
+    <main class="main-content">
+        <header class="topbar">
+            <a class="breadcrumb-link" href="/">← Back to Workspace</a>
+            <span class="workspace-label">ACCOUNT SETTINGS</span>
+        </header>
+        <div class="page-content">
+            <section class="welcome-section">
+                <div>
+                    <p class="eyebrow">YOUR ACCOUNT</p>
+                    <h1>Email <span>Settings</span></h1>
+                    <p class="welcome-description">Connect the mailbox you want SponsyBot to use for your approved sponsorship emails.</p>
+                </div>
+            </section>
+
+            <section class="section-block panel">
+                <div class="section-heading">
+                    <div>
+                        <h2>Outgoing email account</h2>
+                        <p>These settings belong only to your signed-in user account.</p>
+                    </div>
+                    <span id="emailConnectionBadge" class="section-tag">NOT CONNECTED</span>
+                </div>
+
+                <form id="emailSettingsForm" autocomplete="off">
+                    <label class="form-field">
+                        Provider preset
+                        <select id="providerPreset">
+                            <option value="gmail">Gmail</option>
+                            <option value="outlook">Outlook / Microsoft 365</option>
+                            <option value="custom">Other SMTP provider</option>
+                        </select>
+                    </label>
+
+                    <div class="form-grid">
+                        <label class="form-field">
+                            Sender display name
+                            <input id="fromName" name="from_name" type="text" maxlength="150" placeholder="Your name or organization" required>
+                        </label>
+                        <label class="form-field">
+                            Sender email address
+                            <input id="fromEmail" name="from_email" type="email" maxlength="255" placeholder="you@example.com" required>
+                        </label>
+                    </div>
+
+                    <div class="form-grid">
+                        <label class="form-field">
+                            SMTP host
+                            <input id="smtpHost" name="smtp_host" type="text" maxlength="255" placeholder="smtp.gmail.com" required>
+                        </label>
+                        <label class="form-field">
+                            SMTP port
+                            <input id="smtpPort" name="smtp_port" type="number" min="1" max="65535" value="587" required>
+                        </label>
+                    </div>
+
+                    <div class="form-grid">
+                        <label class="form-field">
+                            Connection security
+                            <select id="smtpSecurity" name="smtp_security">
+                                <option value="STARTTLS">STARTTLS (usually port 587)</option>
+                                <option value="SSL">SSL/TLS (usually port 465)</option>
+                            </select>
+                        </label>
+                        <label class="form-field">
+                            SMTP username
+                            <input id="smtpUsername" name="smtp_username" type="text" maxlength="255" placeholder="Usually your email address" required>
+                        </label>
+                    </div>
+
+                    <label class="form-field">
+                        SMTP password or app password
+                        <input id="smtpPassword" name="smtp_password" type="password" autocomplete="new-password" placeholder="Enter password / app password">
+                        <small id="passwordHint">The password is encrypted before it is stored. It is never sent back to the browser.</small>
+                    </label>
+
+                    <div class="review-actions">
+                        <button id="saveEmailSettings" class="button button-primary" type="submit">Save Email Settings</button>
+                        <button id="testEmailConnection" class="button button-secondary" type="button" disabled>Test Connection</button>
+                    </div>
+                    <p id="emailSettingsStatus" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+
+            <section class="section-block panel">
+                <h2>Provider notes</h2>
+                <p>For Gmail, use an app password when your account requires it; your normal account password may not work. For Microsoft 365 or a custom provider, use the SMTP settings and authentication method permitted by that provider.</p>
+                <p>Testing checks SMTP connectivity and login only. It does not send an email. SponsyBot still requires you to review the recipient and approve each draft before sending.</p>
+            </section>
+            <footer class="page-footer"><strong>SponsyBot</strong><span>Each user's sender credentials are stored separately.</span></footer>
+        </div>
+    </main>
+</div>
+</body>
+</html>

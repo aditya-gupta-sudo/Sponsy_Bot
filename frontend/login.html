@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#14243c">
+    <title>Sign in | SponsyBot</title>
+    <link rel="stylesheet" href="/static/style.css?v=16">
+    <script src="/static/login.js?v=3" defer></script>
+</head>
+<body class="auth-page">
+    <main class="auth-layout">
+        <section class="auth-brand-panel">
+            <a class="auth-brand" href="/login"><span class="brand-mark">✦</span><span>SponsyBot</span></a>
+            <p class="eyebrow">SPONSORSHIP WORKSPACE</p>
+            <h1>Turn your events into <span>opportunities.</span></h1>
+            <p>Discover relevant sponsors, keep your research organized, and manage outreach with human approval at every send.</p>
+            <div class="auth-benefits">
+                <span>✓ Event and sponsor workflow</span>
+                <span>✓ Evidence-based company research</span>
+                <span>✓ Review every email before sending</span>
+            </div>
+        </section>
+
+        <section class="auth-card" aria-labelledby="authHeading">
+            <div class="auth-card-head">
+                <p class="eyebrow" id="authModeLabel">WELCOME BACK</p>
+                <h2 id="authHeading">Sign in to SponsyBot</h2>
+                <p>Use your account to access your events and saved sponsor data.</p>
+            </div>
+
+            <button class="google-auth-button" id="googleLoginButton" type="button">
+                <span class="google-g" aria-hidden="true">G</span>
+                Continue with Google
+            </button>
+
+            <div class="auth-divider"><span>or use email</span></div>
+
+            <form id="authForm" novalidate>
+                <label class="auth-field" id="nameFieldWrap" hidden>
+                    Full name
+                    <input id="authName" name="name" autocomplete="name" minlength="2" maxlength="120" placeholder="Your name">
+                </label>
+                <label class="auth-field">
+                    Email address
+                    <input id="authEmail" name="email" type="email" required autocomplete="email" maxlength="254" placeholder="you@example.com">
+                </label>
+                <label class="auth-field">
+                    Password
+                    <input id="authPassword" name="password" type="password" required autocomplete="current-password" minlength="10" maxlength="128" placeholder="At least 10 characters">
+                </label>
+                <p class="auth-hint" id="passwordHint" hidden>Use at least 10 characters. Passwords are hashed before storage.</p>
+                <button class="button button-primary auth-submit" id="authSubmitButton" type="submit">Sign In</button>
+            </form>
+
+            <p id="authMessage" class="auth-message" role="status" aria-live="polite"></p>
+            <p class="auth-switch-text"><span id="switchPrompt">New to SponsyBot?</span> <button type="button" class="text-button" id="switchAuthMode">Create an account</button></p>
+            <p class="auth-security-note"><span aria-hidden="true">▣</span> Passwords are hashed. Sessions use revocable, server-side tokens stored as hashes.</p>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SponsyBot | AI Usage &amp; Limits</title>
+    <link rel="stylesheet" href="/static/style.css?v=16">
+    <script src="/static/sidebar.js?v=6" defer></script>
+    <script src="/static/ai-usage.js?v=2" defer></script>
+</head>
+<body>
+<div class="app-layout">
+    <aside class="sidebar" id="app-sidebar" aria-label="Main navigation"></aside>
+    <main class="main-content">
+        <header class="topbar">
+            <span class="workspace-label">SPONSORSHIP WORKSPACE</span>
+            <button class="button button-secondary" id="refreshUsage" type="button">Refresh usage</button>
+        </header>
+        <div class="page-content">
+            <section class="welcome-section">
+                <div>
+                    <p class="eyebrow">MONITORING</p>
+                    <h1>AI Usage <span>&amp; Limits</span></h1>
+                    <p class="welcome-description">
+                        Track provider requests, configured quotas, remaining capacity, and reset windows.
+                    </p>
+                </div>
+                <div class="ai-badge"><span>◴</span> Usage dashboard</div>
+            </section>
+
+            <section class="usage-notice" id="usageNotice" role="status" aria-live="polite">
+                Loading tracked usage…
+            </section>
+
+            <section class="ai-usage-grid" id="aiUsageGrid" aria-label="AI provider usage">
+                <article class="ai-usage-card loading-card"><h2>Loading providers…</h2></article>
+            </section>
+
+            <section class="section-block panel">
+                <div class="section-heading">
+                    <div>
+                        <h2>How to read these limits</h2>
+                        <p>The tracker reports calls made through SponsyBot, not independent usage from other apps or API keys.</p>
+                    </div>
+                </div>
+                <div class="usage-explanation">
+                    <p><strong>Tracked usage</strong> counts provider calls logged by the SponsyBot backend.</p>
+                    <p><strong>Configured limit</strong> must match the quota for your active provider account and model. Provider quotas can vary by plan and model.</p>
+                    <p><strong>Reset countdown</strong> is based on the reset window configured for that provider. Use the provider dashboard to verify the official quota state.</p>
+                </div>
+                <div class="provider-links">
+                    <a href="https://ai.dev/rate-limit" target="_blank" rel="noopener noreferrer">Google AI Studio usage ↗</a>
+                    <a href="https://app.tavily.com/" target="_blank" rel="noopener noreferrer">Tavily dashboard ↗</a>
+                    <a href="https://console.groq.com/usage" target="_blank" rel="noopener noreferrer">Groq usage ↗</a>
+                    <a href="https://hunter.io/dashboard" target="_blank" rel="noopener noreferrer">Hunter dashboard ↗</a>
+                </div>
+            </section>
+
+            <footer class="page-footer">
+                <strong>SponsyBot</strong>
+                <span>Usage values are only as accurate as provider-call instrumentation and configured account limits.</span>
+            </footer>
+        </div>
+    </main>
+</div>
+</body>
+</html>

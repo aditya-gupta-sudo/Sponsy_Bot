@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#14243c">
+
+    <title>SponsyBot | Outreach Tracking</title>
+
+    <link rel="stylesheet" href="/static/style.css?v=16">
+
+    <script src="/static/sidebar.js?v=6" defer></script>
+    <script src="/static/outreach-workspace.js?v=6" defer></script>
+</head>
+
+<body data-view="outreach">
+<div class="app-layout">
+
+    <aside
+        class="sidebar"
+        id="app-sidebar"
+        aria-label="Main navigation">
+    </aside>
+
+    <main class="main-content">
+
+        <!-- Page header -->
+        <header class="topbar">
+            <a class="breadcrumb-link" href="/email-studio">
+                ← Email Studio
+            </a>
+
+            <span class="workspace-label">
+                SPONSORSHIP WORKSPACE
+            </span>
+        </header>
+
+        <div class="page-content">
+
+            <!-- Page introduction -->
+            <section class="welcome-section">
+                <div>
+                    <p class="eyebrow">DELIVERY RECORDS</p>
+
+                    <h1>
+                        Outreach <span>Tracking</span>
+                    </h1>
+
+                    <p class="welcome-description">
+                        Review saved drafts, sent messages, delivery
+                        errors, and replies from sponsors.
+                    </p>
+                </div>
+
+                <a
+                    class="button button-primary"
+                    href="/email-studio">
+                    Open Email Studio →
+                </a>
+            </section>
+
+            <!-- Summary cards -->
+            <section
+                class="stats-grid"
+                aria-label="Outreach summary">
+
+                <article class="stat-card">
+                    <div class="stat-icon blue">▤</div>
+
+                    <div>
+                        <p>Total records</p>
+                        <h2 id="outreachTotal">—</h2>
+                        <small>Saved messages</small>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon green">✓</div>
+
+                    <div>
+                        <p>Sent</p>
+                        <h2 id="outreachSent">—</h2>
+                        <small>SMTP reported successful</small>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon orange">!</div>
+
+                    <div>
+                        <p>Failed / checking</p>
+                        <h2 id="outreachAttention">—</h2>
+                        <small>Review before retrying</small>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon purple">✎</div>
+
+                    <div>
+                        <p>Drafts</p>
+                        <h2 id="outreachDrafts">—</h2>
+                        <small>Not yet sent</small>
+                    </div>
+                </article>
+
+            </section>
+
+            <!-- Outreach records -->
+            <section class="section-block panel">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">WORKSPACE HISTORY</p>
+
+                        <h2>All outreach records</h2>
+
+                        <p
+                            id="outreachMessage"
+                            role="status"
+                            aria-live="polite">
+                            Loading outreach records…
+                        </p>
+                    </div>
+
+                    <label class="event-search-box">
+                        <span aria-hidden="true">⌕</span>
+
+                        <input
+                            id="outreachSearchInput"
+                            type="search"
+                            placeholder="Company, event, recipient, subject…"
+                            aria-label="Search outreach history">
+                    </label>
+                </div>
+
+                <!-- Filters and actions -->
+                <div class="sponsor-filters">
+
+                    <label>
+                        Status
+
+                        <select id="outreachStatusFilter">
+                            <option value="">All statuses</option>
+                            <option value="DRAFT">Draft</option>
+                            <option value="SENDING">Sending</option>
+                            <option value="SENT">Sent</option>
+                            <option value="FAILED">Failed</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Sort by
+
+                        <select id="outreachSortFilter">
+                            <option value="newest">Newest first</option>
+                            <option value="oldest">Oldest first</option>
+                            <option value="company">Company A–Z</option>
+                            <option value="event">Event A–Z</option>
+                            <option value="recipient">Recipient A–Z</option>
+                            <option value="status">Status A–Z</option>
+                        </select>
+                    </label>
+
+                    <button
+                        id="refreshOutreach"
+                        class="button button-secondary"
+                        type="button">
+                        Refresh
+                    </button>
+
+                    <a
+                        id="connectGmailInbox"
+                        class="button button-secondary"
+                        href="/auth/gmail/connect">
+                        Connect Gmail Inbox
+                    </a>
+
+                    <button
+                        id="checkRepliesButton"
+                        class="button button-primary"
+                        type="button"
+                        disabled>
+                        Check Replies
+                    </button>
+
+                </div>
+
+                <!-- Gmail connection status -->
+                <div class="panel" style="margin-top: 16px;">
+                    <div>
+                        <h3 style="margin-top: 0;">
+                            Gmail Reply Tracking
+                        </h3>
+
+                        <p
+                            id="gmailInboxStatus"
+                            role="status"
+                            aria-live="polite">
+                            Checking Gmail connection…
+                        </p>
+
+                        <p class="welcome-description">
+                            Connect the Gmail inbox that receives sponsor
+                            replies. Select Check Replies to search for
+                            responses to your sent outreach messages.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Records table -->
+                <div class="table-wrapper">
+                    <table class="events-table">
+                        <thead>
+                            <tr>
+                                <th>Created</th>
+                                <th>Company</th>
+                                <th>Event</th>
+                                <th>Recipient</th>
+                                <th>Subject</th>
+                                <th>Status / Reply</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="outreachTableBody">
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <!-- Footer -->
+            <footer class="page-footer">
+                <strong>SponsyBot</strong>
+
+                <span>
+                    Review outgoing messages and manually check for
+                    sponsor replies before scheduling follow-ups.
+                </span>
+            </footer>
+
+        </div>
+    </main>
+</div>
+
+<!-- Outreach record details dialog -->
+<dialog
+    id="outreachDetailDialog"
+    class="event-dialog email-modal"
+    aria-labelledby="outreachDetailHeading">
+
+    <div class="dialog-header">
+
+        <div>
+            <p class="eyebrow">OUTREACH RECORD</p>
+
+            <h2 id="outreachDetailHeading">
+                Email details
+            </h2>
+
+            <p id="outreachDetailSubtitle"></p>
+        </div>
+
+        <button
+            id="closeOutreachDetailIcon"
+            class="icon-button"
+            type="button"
+            aria-label="Close details">
+            ✕
+        </button>
+
+    </div>
+
+    <!-- Sender and recipient -->
+    <div class="email-recipient-summary">
+
+        <div>
+            <span>From</span>
+            <strong id="outreachDetailSender">
+                Email account not configured
+            </strong>
+        </div>
+
+        <div>
+            <span>To</span>
+            <strong id="outreachDetailRecipient"></strong>
+        </div>
+
+    </div>
+
+    <!-- Record metadata -->
+    <div class="outreach-detail-grid">
+
+        <p>
+            <strong>Event:</strong>
+            <span id="outreachDetailEvent"></span>
+        </p>
+
+        <p>
+            <strong>Company:</strong>
+            <span id="outreachDetailCompany"></span>
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+            <span id="outreachDetailStatus"></span>
+        </p>
+
+        <p>
+            <strong>Created:</strong>
+            <span id="outreachDetailCreated"></span>
+        </p>
+
+        <p>
+            <strong>Approved:</strong>
+            <span id="outreachDetailApproved"></span>
+        </p>
+
+        <p>
+            <strong>Sent:</strong>
+            <span id="outreachDetailSent"></span>
+        </p>
+
+    </div>
+
+    <!-- Email content -->
+    <label class="form-field">
+        Subject
+
+        <input
+            id="outreachDetailSubject"
+            type="text"
+            readonly>
+    </label>
+
+    <label class="form-field">
+        Email body
+
+        <textarea
+            id="outreachDetailBody"
+            rows="12"
+            readonly>
+        </textarea>
+    </label>
+
+    <p
+        id="outreachDetailError"
+        class="email-draft-status"
+        role="status"
+        aria-live="polite">
+    </p>
+
+    <!-- Reply tracking -->
+    <section
+        id="outreachReplyBox"
+        class="panel"
+        hidden>
+
+        <h3>Reply tracking</h3>
+
+        <p
+            id="outreachReplyDetails"
+            role="status"
+            aria-live="polite">
+        </p>
+
+        <label class="form-field">
+            Reply outcome
+
+            <select id="outreachReplyDecision">
+                <option value="UNCLASSIFIED">
+                    Not classified
+                </option>
+
+                <option value="INTERESTED">
+                    Interested
+                </option>
+
+                <option value="DECLINED">
+                    Declined
+                </option>
+
+                <option value="NEEDS_DETAILS">
+                    Needs more details
+                </option>
+
+                <option value="FOLLOW_UP">
+                    Follow-up needed
+                </option>
+
+                <option value="CLOSED">
+                    Closed
+                </option>
+            </select>
+        </label>
+
+        <button
+            id="saveReplyDecision"
+            class="button button-primary"
+            type="button"
+            disabled>
+            Save Reply Outcome
+        </button>
+
+    </section>
+
+    <!-- Dialog actions -->
+    <div class="dialog-actions">
+
+        <a
+            id="openDraftInStudio"
+            class="button button-primary"
+            href="/email-studio">
+            Open Email Studio
+        </a>
+
+        <button
+            id="closeOutreachDetail"
+            class="button button-secondary"
+            type="button">
+            Close
+        </button>
+
+    </div>
+
+</dialog>
+
+</body>
+</html>

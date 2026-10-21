@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SponsyBot | Dashboard</title>
+
+    <!-- The version query helps avoid an old cached stylesheet. -->
+    <link rel="stylesheet" href="/static/style.css?v=16">
+    <script src="/static/sidebar.js?v=6" defer></script>
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar" id="app-sidebar" aria-label="Main navigation"></aside>
+
+        <main class="main-content" id="home">
+            <header class="topbar">
+                <label class="search-box">
+                    <span>⌕</span>
+                    <input id="globalSearchBox" type="search"
+                           placeholder="Search events, companies, or sponsors..."
+                           aria-label="Search">
+                </label>
+                <span class="workspace-label">SPONSORSHIP WORKSPACE</span>
+            </header>
+
+            <div class="page-content">
+                <section class="welcome-section">
+                    <div>
+                        <p class="eyebrow">YOUR WORKSPACE</p>
+                        <h1>Welcome to <span>SponsyBot</span></h1>
+                        <p class="welcome-description">
+                            Plan events. Discover sponsors. Build partnerships.
+                        </p>
+                    </div>
+                    <div class="ai-badge">
+                        <span>✦</span> AI-powered sponsorship management
+                    </div>
+                </section>
+
+                <section class="stats-grid" aria-label="Dashboard statistics">
+                    <article class="stat-card">
+                        <div class="stat-icon blue">▦</div>
+                        <div>
+                            <p>Total Events</p>
+                            <h2 id="homeTotalEvents">—</h2>
+                            <small>Events in your workspace</small>
+                        </div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-icon green">▤</div>
+                        <div>
+                            <p>Companies Found</p>
+                            <h2 id="homeCompaniesFound">—</h2>
+                            <small>Potential sponsors discovered</small>
+                        </div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-icon orange">♧</div>
+                        <div>
+                            <p>In Pipeline</p>
+                            <h2 id="homePipelineCount">—</h2>
+                            <small>Companies being considered</small>
+                        </div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-icon purple">✉</div>
+                        <div>
+                            <p>Emails Sent</p>
+                            <h2 id="homeEmailsSent">—</h2>
+                            <small>Approved outreach emails</small>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="hero-panel">
+                    <div class="hero-copy">
+                        <p class="eyebrow">WORK SMARTER WITH AI</p>
+                        <h2>Turn your events into opportunities.</h2>
+                        <p>
+                            Discover relevant companies, evaluate sponsor fit,
+                            and organize your outreach from one workspace.
+                        </p>
+                        <a class="button button-primary" href="/events#events">
+                            Create an event <span>→</span>
+                        </a>
+                    </div>
+                    <div class="hero-art" aria-hidden="true">
+                        <div class="hero-orbit"></div>
+                        <div class="hero-star">✦</div>
+                        <span class="floating-label">Sponsor Fit</span>
+                    </div>
+                </section>
+
+                <section class="section-block">
+                    <div class="section-heading">
+                        <div>
+                            <h2>Quick Actions</h2>
+                            <p>Get started with your sponsorship workflow.</p>
+                        </div>
+                    </div>
+
+                    <div class="actions-grid">
+                        <a class="action-card" href="/events#events">
+                            <div class="action-icon blue">＋</div>
+                            <h3>Create Event</h3>
+                            <p>Add event details and sponsorship requirements.</p>
+                            <span class="action-link">Create Event →</span>
+                        </a>
+                        <a class="action-card" href="/sponsors">
+                            <div class="action-icon green">⌕</div>
+                            <h3>Discover Sponsors</h3>
+                            <p>Find companies that fit your event.</p>
+                            <span class="action-link">Find Companies →</span>
+                        </a>
+                        <a class="action-card" href="/pipeline">
+                            <div class="action-icon orange">▤</div>
+                            <h3>Manage Pipeline</h3>
+                            <p>Review and select promising companies.</p>
+                            <span class="action-link">View Pipeline →</span>
+                        </a>
+                        <a class="action-card" href="/email-studio">
+                            <div class="action-icon purple">✉</div>
+                            <h3>Email Studio</h3>
+                            <p>Prepare personalized sponsorship emails.</p>
+                            <span class="action-link">Open Email Studio →</span>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="section-block panel" aria-labelledby="homeRecentHeading">
+                    <div class="section-heading">
+                        <div>
+                            <h2 id="homeRecentHeading">Recent Events</h2>
+                            <p>Open an event to continue sponsor discovery and outreach.</p>
+                        </div>
+                        <a class="button button-secondary" href="/events">View all events →</a>
+                    </div>
+                    <p id="homeEventsMessage" role="status" aria-live="polite">Loading events…</p>
+                    <div class="table-wrapper">
+                        <table class="events-table">
+                            <thead><tr><th>Event</th><th>Date</th><th>Participants</th><th>Type</th><th>Workflow Progress</th></tr></thead>
+                            <tbody id="homeRecentEvents"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <footer class="page-footer">
+                    <strong>SponsyBot</strong>
+                    <span>Sponsorship management workspace</span>
+                </footer>
+            </div>
+        </main>
+    </div>
+    <script src="/static/home.js?v=15" defer></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SponsyBot | Sponsor Discovery</title>
+    <link rel="stylesheet" href="/static/style.css?v=16">
+    <script src="/static/sidebar.js?v=6" defer></script>
+</head>
+<body>
+<div class="app-layout">
+    <aside class="sidebar" id="app-sidebar" aria-label="Main navigation"></aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <span class="workspace-label">SPONSORSHIP WORKSPACE</span>
+        </header>
+
+        <div class="page-content">
+            <section class="welcome-section">
+                <div>
+                    <p class="eyebrow">COMPANY DATABASE</p>
+                    <h1>Sponsor <span>Discovery</span></h1>
+                    <p class="welcome-description">
+                        Search discovered companies, review sponsorship evidence,
+                        and track outreach across your events.
+                    </p>
+                </div>
+
+                <a class="button button-secondary" href="/events">
+                    View Events
+                </a>
+            </section>
+
+            <section class="stats-grid">
+                <article class="stat-card">
+                    <div class="stat-icon blue">▦</div>
+                    <div>
+                        <p>Companies</p>
+                        <h2 id="companyCount">—</h2>
+                        <small>Across your events</small>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <div>
+                        <p>Outreach Records</p>
+                        <h2 id="outreachCount">—</h2>
+                        <small>Saved drafts and send attempts</small>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon orange">◷</div>
+                    <div>
+                        <p>Sent Emails</p>
+                        <h2 id="sentCount">—</h2>
+                        <small>Accepted by SMTP</small>
+                    </div>
+                </article>
+            </section>
+
+            <section class="section-block panel">
+                <div class="sponsor-tabs" role="tablist">
+                    <button type="button"
+                            id="directoryTab"
+                            class="event-tab active"
+                            role="tab"
+                            aria-selected="true">
+                        Sponsor Directory
+                    </button>
+                    <button type="button"
+                            id="outreachTab"
+                            class="event-tab"
+                            role="tab"
+                            aria-selected="false">
+                        Outreach History
+                    </button>
+                </div>
+
+                <section id="directoryPanel" role="tabpanel">
+                    <div class="section-heading">
+                        <div>
+                            <h2>All Discovered Companies</h2>
+                            <p>
+                                Companies linked to your saved events, grouped by industry.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="sponsor-filters">
+                        <label class="sponsor-search">
+                            Search companies
+                            <input id="companySearch"
+                                   type="search"
+                                   placeholder="Company, industry or website">
+                        </label>
+
+                        <label>
+                            Industry
+                            <select id="industryFilter">
+                                <option value="">All industries</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Sort companies
+                            <select id="companySort">
+                                <option value="name">Name A–Z</option>
+                                <option value="name_desc">Name Z–A</option>
+                                <option value="industry">Industry</option>
+                                <option value="events">Most associated events</option>
+                                <option value="recent">Most recent event</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <p id="directoryMessage" role="status" aria-live="polite">
+                        Loading companies...
+                    </p>
+
+                    <div id="sponsorDirectory"></div>
+
+                    <section id="companyHistoryPanel"
+                             class="sponsor-detail-panel"
+                             hidden>
+                        <div class="section-heading">
+                            <div>
+                                <h2 id="historyTitle">Company History</h2>
+                                <p id="historyMessage" role="status"></p>
+                            </div>
+                            <button id="closeHistory"
+                                    class="button button-secondary"
+                                    type="button">
+                                Close
+                            </button>
+                        </div>
+                        <div id="companyHistoryContent"></div>
+                    </section>
+                </section>
+
+                <section id="outreachPanel" role="tabpanel" hidden>
+                    <div class="section-heading">
+                        <div>
+                            <h2>Outreach History</h2>
+                            <p>
+                                Search and sort saved drafts and SMTP send records.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="sponsor-filters">
+                        <label class="sponsor-search">
+                            Search outreach
+                            <input id="outreachSearch"
+                                   type="search"
+                                   placeholder="Company, event, recipient or subject">
+                        </label>
+
+                        <label>
+                            Status
+                            <select id="outreachStatus">
+                                <option value="">All statuses</option>
+                                <option value="DRAFT">Draft</option>
+                                <option value="SENDING">Sending</option>
+                                <option value="SENT">Sent</option>
+                                <option value="FAILED">Failed</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Sort records
+                            <select id="outreachSort">
+                                <option value="newest">Newest first</option>
+                                <option value="oldest">Oldest first</option>
+                                <option value="company">Company A–Z</option>
+                                <option value="event">Event A–Z</option>
+                                <option value="recipient">Recipient A–Z</option>
+                                <option value="status">Status A–Z</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <p id="outreachMessage" role="status" aria-live="polite">
+                        Loading outreach records...
+                    </p>
+
+                    <div class="table-wrapper">
+                        <table class="events-table">
+                            <thead>
+                                <tr>
+                                    <th>Created</th>
+                                    <th>Company</th>
+                                    <th>Event</th>
+                                    <th>Recipient</th>
+                                    <th>Subject</th>
+                                    <th>Status</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody id="outreachTableBody"></tbody>
+                        </table>
+                    </div>
+
+                    <section id="outreachDetailPanel"
+                             class="sponsor-detail-panel"
+                             hidden>
+                        <div class="section-heading">
+                            <h2>Email Record</h2>
+                            <button id="closeOutreachDetail"
+                                    class="button button-secondary"
+                                    type="button">
+                                Close
+                            </button>
+                        </div>
+                        <div id="outreachDetailContent"></div>
+                    </section>
+                </section>
+            </section>
+
+            <footer class="page-footer">
+                <strong>SponsyBot</strong>
+                <span>Sponsorship management workspace</span>
+            </footer>
+        </div>
+    </main>
+</div>
+
+<script src="/static/sponsors.js?v=15"></script>
+</body>
+</html>

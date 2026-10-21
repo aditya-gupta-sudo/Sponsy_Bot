@@ -1,0 +1,1 @@
+print("Sponsy Bot is starting...")

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#14243c">
+    <title>SponsyBot | Email Studio</title>
+    <link rel="stylesheet" href="/static/style.css?v=16">
+    <script src="/static/sidebar.js?v=6" defer></script>
+    <script src="/static/outreach-workspace.js?v=6" defer></script>
+</head>
+<body data-view="email-studio">
+<div class="app-layout">
+    <aside class="sidebar" id="app-sidebar" aria-label="Main navigation"></aside>
+    <main class="main-content">
+        <header class="topbar">
+            <a class="breadcrumb-link" href="/pipeline">← Sponsor Pipeline</a>
+            <span class="workspace-label">SPONSORSHIP WORKSPACE</span>
+        </header>
+        <div class="page-content">
+            <section class="welcome-section">
+                <div>
+                    <p class="eyebrow">HUMAN-APPROVED OUTREACH</p>
+                    <h1>Email <span>Studio</span></h1>
+                    <p class="welcome-description">Review, edit, and approve saved drafts. No email is sent until you confirm the recipient and approve delivery.</p>
+                </div>
+                <a class="button button-secondary" href="/outreach">View Outreach History →</a>
+            </section>
+            <section class="stats-grid" aria-label="Email studio summary">
+                <article class="stat-card"><div class="stat-icon blue">✉</div><div><p>Saved drafts</p><h2 id="studioDraftCount">—</h2><small>Ready for review</small></div></article>
+                <article class="stat-card"><div class="stat-icon green">✓</div><div><p>Sent</p><h2 id="studioSentCount">—</h2><small>Recorded successful sends</small></div></article>
+                <article class="stat-card"><div class="stat-icon orange">◷</div><div><p>Needs attention</p><h2 id="studioAttentionCount">—</h2><small>Failed or in-progress records</small></div></article>
+            </section>
+            <section class="section-block panel">
+                <div class="section-heading">
+                    <div><p class="eyebrow">DRAFT QUEUE</p><h2>Emails awaiting review</h2><p id="studioMessage" role="status" aria-live="polite">Loading drafts…</p></div>
+                    <label class="event-search-box"><span aria-hidden="true">⌕</span><input id="studioSearch" type="search" placeholder="Search event, company, or recipient…" aria-label="Search email drafts"></label>
+                </div>
+                <div class="sponsor-filters email-studio-filters">
+                    <label>Status<select id="studioStatus"><option value="DRAFT">Drafts awaiting review</option><option value="FAILED">Failed sends</option><option value="SENDING">Sending / needs check</option><option value="SENT">Sent emails</option><option value="">All statuses</option></select></label>
+                    <label>Sort<select id="studioSort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="company">Company A–Z</option><option value="event">Event A–Z</option><option value="recipient">Recipient A–Z</option></select></label>
+                    <button class="button button-secondary" id="refreshStudio" type="button">Refresh</button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="events-table">
+                        <thead><tr><th>Created</th><th>Company</th><th>Event</th><th>Recipient</th><th>Subject</th><th>Status</th><th>Action</th></tr></thead>
+                        <tbody id="studioTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+            <footer class="page-footer"><strong>SponsyBot</strong><span>Review recipient, subject, and body before sending.</span></footer>
+        </div>
+    </main>
+</div>
+<dialog id="studioDraftDialog" class="event-dialog email-modal" aria-labelledby="studioDialogHeading">
+    <form id="studioDraftForm" method="dialog">
+        <div class="dialog-header"><div><p class="eyebrow">HUMAN REVIEW REQUIRED</p><h2 id="studioDialogHeading">Review email</h2><p id="studioDialogSubtitle">Edit the draft before sending.</p></div><button id="studioCloseIcon" class="icon-button" type="button" aria-label="Close editor">✕</button></div>
+        <div class="email-recipient-summary"><div><span>From</span><strong id="studioSender">Configured SMTP sender</strong></div><div><span>To</span><strong id="studioRecipient">Loading recipient…</strong></div></div>
+        <label class="form-field">Subject<input id="studioSubject" type="text" maxlength="500" required></label>
+        <label class="form-field">Email body<textarea id="studioBody" rows="12" required></textarea></label>
+        <label class="email-confirm-recipient"><input id="studioConfirmRecipient" type="checkbox"> I checked that this recipient address is correct.</label>
+        <p id="studioDraftStatus" class="email-draft-status" role="status" aria-live="polite"></p>
+        <div class="dialog-actions"><button id="studioCancelDraft" class="button button-secondary" type="button">Close</button><button id="studioSaveDraft" class="button button-secondary" type="button">Save Draft</button><button id="studioSendDraft" class="button button-primary" type="button" disabled>Approve &amp; Send</button></div>
+    </form>
+</dialog>
+</body>
+</html>

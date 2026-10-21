@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SponsyBot | Events</title>
+    <link rel="stylesheet" href="/static/style.css?v=16">
+    <script src="/static/sidebar.js?v=6" defer></script>
+</head>
+<body>
+<div class="app-layout">
+    <aside class="sidebar" id="app-sidebar" aria-label="Main navigation"></aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <span class="workspace-label">SPONSORSHIP WORKSPACE</span>
+        </header>
+
+        <div class="page-content">
+            <section class="welcome-section">
+                <div>
+                    <p class="eyebrow">EVENT MANAGEMENT</p>
+                    <h1>Your <span>Events</span></h1>
+                    <p class="welcome-description">
+                        Manage event details and discover relevant sponsors.
+                    </p>
+                </div>
+
+                <a class="button button-primary" href="#events">+ Create Event</a>
+            </section>
+
+            <section class="section-block panel" id="events">
+                                <div class="section-heading">
+                                    <div>
+                                        <h2 id="eventFormTitle">Create an Event</h2>
+                                        <p id="eventFormDescription">Enter your details to begin finding sponsors.</p>
+                                    </div>
+                                    <span class="section-tag" id="eventFormTag">EVENT SETUP</span>
+                                </div>
+            
+                                <form id="eventForm">
+                                    <div class="form-grid">
+                                        <label class="form-field">
+                                            Event Name
+                                            <input type="text" id="eventName"
+                                                   placeholder="e.g. ACM Hackathon" required>
+                                        </label>
+                                        <label class="form-field">
+                                            College / Organization
+                                            <input type="text" id="college"
+                                                   placeholder="e.g. SVNIT" required>
+                                        </label>
+                                        <label class="form-field">
+                                            City
+                                            <input type="text" id="city"
+                                                   placeholder="e.g. Surat" required>
+                                        </label>
+                                        <label class="form-field">
+                                            State
+                                            <input type="text" id="state"
+                                                   placeholder="e.g. Gujarat" required>
+                                        </label>
+                                        <label class="form-field">
+                                            Event Date
+                                            <input type="date" id="eventDate" required>
+                                        </label>
+                                        <label class="form-field">
+                                            Expected Participants
+                                            <input type="number" id="participants" min="1"
+                                                   placeholder="e.g. 500" required>
+                                        </label>
+                                        <label class="form-field full-width">
+                                            Event Type
+                                            <select id="eventType" required>
+                                                <option value="">Select event type</option>
+                                                <option value="Hackathon">Hackathon</option>
+                                                <option value="Technical Fest">Technical Fest</option>
+                                                <option value="Cultural Fest">Cultural Fest</option>
+                                                <option value="Sports Event">Sports Event</option>
+                                                <option value="Workshop">Workshop</option>
+                                                <option value="Conference">Conference</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </label>
+                                        <label class="form-field full-width">
+                                            Event Description
+                                            <textarea id="description" rows="4"
+                                                      placeholder="Describe your event..."
+                                                      required></textarea>
+                                        </label>
+                                    </div>
+                                    
+                                    <fieldset class="sponsorship-options">
+                                        <legend>Audience Profile</legend>
+                                        <p>Describe the people your event is intended to reach.</p>
+            
+                                        <div class="form-grid">
+            
+                                            <div class="form-field full-width">
+                                                <span>Age Groups</span>
+                                                <div class="checkbox-grid">
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="age_groups" value="16-18">
+                                                        16–18
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="age_groups" value="18-22">
+                                                        18–22
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="age_groups" value="23-30">
+                                                        23–30
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="age_groups" value="30+">
+                                                        30+
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="age_groups" value="Unknown">
+                                                        Unknown
+                                                    </label>
+                                                </div>
+                                            </div>
+            
+                                            <div class="form-field full-width">
+                                                <span>Audience Types</span>
+                                                <div class="checkbox-grid">
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="audience_types" value="College students">
+                                                        College students
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="audience_types" value="School students">
+                                                        School students
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="audience_types" value="Working professionals">
+                                                        Working professionals
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="audience_types" value="Entrepreneurs">
+                                                        Entrepreneurs
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="audience_types" value="Families">
+                                                        Families
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="audience_types" value="Competitive-exam aspirants">
+                                                        Competitive-exam aspirants
+                                                    </label>
+                                                </div>
+                                            </div>
+            
+                                            <div class="form-field full-width">
+                                                <span>Audience Interests</span>
+                                                <div class="checkbox-grid">
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="interests" value="Technology">
+                                                        Technology
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="interests" value="Gaming">
+                                                        Gaming
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="interests" value="Fitness">
+                                                        Fitness
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="interests" value="Food">
+                                                        Food
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="interests" value="Career development">
+                                                        Career development
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="interests" value="Entertainment">
+                                                        Entertainment
+                                                    </label>
+                                                    <label class="checkbox-option">
+                                                        <input type="checkbox" name="interests" value="Finance">
+                                                        Finance
+                                                    </label>
+                                                </div>
+                                            </div>
+            
+                                            <label class="form-field">
+                                                Geographic Reach
+                                                <select id="geographicReach">
+                                                    <option value="">Unknown</option>
+                                                    <option value="Host college">Host college</option>
+                                                    <option value="Nearby colleges">Nearby colleges</option>
+                                                    <option value="Across the city">Across the city</option>
+                                                    <option value="Across the state">Across the state</option>
+                                                    <option value="Across India">Across India</option>
+                                                    <option value="International">International</option>
+                                                </select>
+                                            </label>
+            
+                                            <label class="form-field">
+                                                Audience Spending Profile
+                                                <select id="spendingProfile">
+                                                    <option value="unknown">Unknown</option>
+                                                    <option value="low">Low</option>
+                                                    <option value="moderate">Moderate</option>
+                                                    <option value="high">High</option>
+                                                </select>
+                                            </label>
+            
+                                            <label class="form-field full-width">
+                                                Event Format
+                                                <select id="eventFormat">
+                                                    <option value="">Unknown</option>
+                                                    <option value="on-campus">On-campus</option>
+                                                    <option value="off-campus">Off-campus</option>
+                                                    <option value="online">Online</option>
+                                                    <option value="hybrid">Hybrid</option>
+                                                </select>
+                                            </label>
+            
+                                        </div>
+                                    </fieldset>
+            
+                                    <fieldset class="sponsorship-options">
+                                        <legend>Sponsorship Requirements</legend>
+                                        <p>Select every type of support your event needs.</p>
+                                        <div class="checkbox-grid">
+                                            <label class="checkbox-option">
+                                                <input type="checkbox" name="sponsorship" value="Cash">
+                                                Cash
+                                            </label>
+                                            <label class="checkbox-option">
+                                                <input type="checkbox" name="sponsorship" value="Goodies">
+                                                Goodies
+                                            </label>
+                                            <label class="checkbox-option">
+                                                <input type="checkbox" name="sponsorship" value="Food">
+                                                Food
+                                            </label>
+                                            <label class="checkbox-option">
+                                                <input type="checkbox" name="sponsorship" value="Infrastructure">
+                                                Infrastructure
+                                            </label>
+                                            <label class="checkbox-option">
+                                                <input type="checkbox" name="sponsorship" value="Cloud Credits">
+                                                Cloud Credits
+                                            </label>
+                                        </div>
+                                    </fieldset>
+            
+                                    <div class="form-footer">
+                                        <p>Every sponsor recommendation will be reviewed before outreach.</p>
+                                        <button type="button" id="cancelEditButton"
+                                                class="button button-secondary" hidden>
+                                            Cancel Edit
+                                        </button>
+                                        <button type="submit" id="eventFormSubmit"
+                                                class="button button-primary">
+                                            Create Event <span>→</span>
+                                        </button>
+                                    </div>
+                                    <div id="eventResult" role="status" aria-live="polite"></div>
+                                </form>
+                            </section>
+
+            <section class="stats-grid">
+                <article class="stat-card">
+                    <div class="stat-icon blue">▦</div>
+                    <div>
+                        <p>Total Events</p>
+                        <h2 id="totalEvents">—</h2>
+                        <small>All saved events</small>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <div>
+                        <p>Past Events</p>
+                        <h2 id="pastEventsCount">—</h2>
+                        <small>Events before today</small>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon orange">◷</div>
+                    <div>
+                        <p>Upcoming Events</p>
+                        <h2 id="upcomingEventsCount">—</h2>
+                        <small>Events today or later</small>
+                    </div>
+                </article>
+            </section>
+
+            <section class="section-block panel">
+                <div class="section-heading">
+                    <div>
+                        <h2>Saved Events</h2>
+                        <p>Manage each event and its sponsor discovery.</p>
+                    </div>
+                </div>
+
+                <div class="event-tabs">
+                    <button class="event-tab active" data-filter="all" type="button">
+                        All Events
+                    </button>
+                    <button class="event-tab" data-filter="past" type="button">
+                        Past Events
+                    </button>
+                    <button class="event-tab" data-filter="upcoming" type="button">
+                        Upcoming Events
+                    </button>
+                </div>
+
+                <div class="event-controls" aria-label="Search and sort events">
+                    <label class="event-search-box">
+                        <span aria-hidden="true">⌕</span>
+                        <input id="eventSearch" type="search"
+                               placeholder="Search event, college, city, type..."
+                               aria-label="Search events">
+                    </label>
+                    <label class="event-control-label">
+                        <span>Event type</span>
+                        <select id="eventTypeFilter" aria-label="Filter by event type">
+                            <option value="all">All types</option>
+                            <option value="Hackathon">Hackathon</option>
+                            <option value="Technical Fest">Technical Fest</option>
+                            <option value="Cultural Fest">Cultural Fest</option>
+                            <option value="Sports Event">Sports Event</option>
+                            <option value="Workshop">Workshop</option>
+                            <option value="Conference">Conference</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </label>
+                    <label class="event-control-label event-sort-control">
+                        <span>Sort by</span>
+                        <select id="eventSort" aria-label="Sort events">
+                            <option value="upcoming-first">Upcoming date first</option>
+                            <option value="date-asc">Event date: earliest</option>
+                            <option value="date-desc">Event date: latest</option>
+                            <option value="sponsors-desc">Most sponsor candidates</option>
+                            <option value="participants-desc">Most participants</option>
+                            <option value="name-asc">Event name: A–Z</option>
+                            <option value="newest">Recently added</option>
+                        </select>
+                    </label>
+                </div>
+
+                <p id="eventsMessage" role="status" aria-live="polite">
+                    Loading events...
+                </p>
+
+                <div class="table-wrapper">
+                    <table class="events-table">
+                        <thead>
+                            <tr>
+                                <th>Event ID</th>
+                                <th>Event Name</th>
+                                <th>Date</th>
+                                <th>Participants</th>
+                                <th>Sponsor Candidates</th>
+                                <th>Workflow Progress</th>
+                                <th>Event Details</th>
+                                <th>Sponsor Discovery</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eventsTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="sponsorReviewSection" class="section-block panel" hidden>
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">EVENT SPONSORS</p>
+                        <h2 id="sponsorReviewTitle">Sponsor Discovery</h2>
+                        <p id="sponsorReviewMessage" role="status" aria-live="polite">
+                            Select an event to view sponsors.
+                        </p>
+                    </div>
+
+                    <div class="review-actions">
+                        <button id="runDiscoveryButton"
+                                class="button button-primary"
+                                type="button">
+                            Run Discovery
+                        </button>
+                        <button id="closeSponsorReview"
+                                class="button button-secondary"
+                                type="button">
+                            Close
+                        </button>
+                    </div>
+                </div>
+
+                <div id="sponsorCandidates" class="sponsor-candidates"></div>
+            </section>
+
+            <footer class="page-footer">
+                <strong>SponsyBot</strong>
+                <span>Sponsorship management workspace</span>
+            </footer>
+        </div>
+    </main>
+</div>
+
+
+
+<script src="/static/events.js?v=15"></script>
+</body>
+</html>
